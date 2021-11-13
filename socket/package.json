@@ -1,5 +1,5 @@
 {
-	"name": "@axeridev/exolix-socket",
+	"name": "@neoxodev/exolix-socket",
 	"version": "0.1.0",
 	"description": "",
 	"main": "dist/Socket.js",

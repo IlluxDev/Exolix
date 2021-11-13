@@ -1,5 +1,5 @@
 {
-	"name": "@axeridev/exolix-rest",
+	"name": "@neoxodev/exolix-rest",
 	"version": "0.1.0",
 	"description": "",
 	"main": "dist/Rest.js",

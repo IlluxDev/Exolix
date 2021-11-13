@@ -1,5 +1,5 @@
 {
-	"name": "@neoxo/exolix-terminal",
+	"name": "@neoxodev/exolix-terminal",
 	"version": "0.1.0",
 	"description": "",
 	"main": "dist/Terminal.js",
