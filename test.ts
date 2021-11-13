@@ -8,6 +8,9 @@ terminal.success("Success");
 
 const rest = new Rest({
 	port: 8080,
+	listeningPaths: {
+		get: ["/test"]
+	}
 });
 
 rest.start();
