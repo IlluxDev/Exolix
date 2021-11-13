@@ -1,11 +1,9 @@
 {
   "name": "@neoxo/exolix",
+  "private": true,
   "version": "0.1.0",
   "description": "A NodeJS framework",
   "main": " ",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NeoxoDev/Exolix.git"
@@ -15,5 +13,8 @@
   "bugs": {
     "url": "https://github.com/NeoxoDev/Exolix/issues"
   },
-  "homepage": "https://github.com/NeoxoDev/Exolix#readme"
+  "homepage": "https://github.com/NeoxoDev/Exolix#readme",
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  }
 }
