@@ -4,6 +4,7 @@
  - Is Exported: false
  - Export: `{ terminal }`
  - Package: `@axeridev/exolix-terminal`
+ - Location: `/terminal/Terminal.ts`
 
 # Public Methods
 | Name      | Returns | Parameters     | Description                          |

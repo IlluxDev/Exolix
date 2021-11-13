@@ -11,4 +11,3 @@ terminal.success("A success message");
 terminal.warning("A warning message");
 terminal.error("An error message");
 ```
-
