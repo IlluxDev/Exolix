@@ -41,13 +41,19 @@ class Terminal {
 	 * @param text Text message
 	 * @returns Full output
 	 */
-	private prefix(color: string, prefix: string, text: string | number): string {
-		return chalk.hex("#777")(` [ ${moment(new Date()).format("HH:mm:ss")} ]`) + chalk.hex(color)(` [ ${prefix} ] `) + text;
+	private prefix(
+		color: string,
+		prefix: string,
+		text: string | number
+	): string {
+		return (
+			chalk.hex("#777")(` [ ${moment(new Date()).format("HH:mm:ss")} ]`) +
+			chalk.hex(color)(` [ ${prefix} ] `) +
+			text
+		);
 	}
 }
 
 const terminal = new Terminal();
 
-export {
-	terminal
-}
+export { terminal };

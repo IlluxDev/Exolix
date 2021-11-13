@@ -5,7 +5,10 @@ export default {
 	input: "Terminal.ts",
 	output: {
 		dir: "dist",
-		format: "cjs"
+		format: "cjs",
 	},
-	plugins: [typescript({module: "ESNext"}), commonjs({transformMixedEsModules:true})]
+	plugins: [
+		typescript({ module: "ESNext" }),
+		commonjs({ transformMixedEsModules: true }),
+	],
 };
