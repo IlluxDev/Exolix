@@ -3,13 +3,14 @@
   "private": true,
   "version": "0.1.0",
   "description": "A NodeJS framework",
-  "main": " ",
+  "main": "",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NeoxoDev/Exolix.git"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "node build.js",
+	"start": "tsc --build && node test.js && tsc --build --clean"
   },
   "author": "Neoxo",
   "license": "Apache-2.0",
@@ -18,9 +19,6 @@
   },
   "homepage": "https://github.com/NeoxoDev/Exolix#readme",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^21.0.1",
-    "@rollup/plugin-typescript": "^8.3.0",
-    "rollup": "^2.60.0",
     "typescript": "^4.4.4",
     "yarn": "^1.22.17"
   }

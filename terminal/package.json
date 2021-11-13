@@ -2,13 +2,17 @@
   "name": "@neoxo/exolix-terminal",
   "version": "0.1.0",
   "description": "",
-  "main": "./Terminal.js",
+  "main": "dist/Terminal.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c"
   },
   "author": "Neoxo",
   "license": "Apache-2.0",
   "devDependencies": {
-    "chalk": "^4.1.2"
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-typescript": "^8.3.0",
+    "chalk": "^4.1.2",
+    "moment": "^2.29.1",
+    "rollup": "^2.60.0"
   }
 }

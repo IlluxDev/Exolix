@@ -2,10 +2,10 @@ import typescript from "@rollup/plugin-typescript";
 import commonjs from "@rollup/plugin-commonjs";
 
 export default {
-	input: "Exolix.js",
+	input: "Terminal.ts",
 	output: {
 		dir: "dist",
 		format: "cjs"
 	},
-	plugins: [typescript(), commonjs({transformMixedEsModules:true})]
+	plugins: [typescript({module: "ESNext"}), commonjs({transformMixedEsModules:true})]
 };
