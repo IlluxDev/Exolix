@@ -47,7 +47,7 @@ class Terminal {
 		text: string | number
 	): string {
 		return (
-			chalk.hex("#777")(` [ ${moment(new Date()).format("HH:mm:ss")} ]`) +
+			chalk.hex("#777")(`[ ${moment(new Date()).format("HH:mm:ss")} ]`) +
 			chalk.hex(color)(` [ ${prefix} ] `) +
 			text
 		);
@@ -55,5 +55,4 @@ class Terminal {
 }
 
 const terminal = new Terminal();
-
 export { terminal };
