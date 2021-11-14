@@ -25,7 +25,7 @@ rest.onRequest("get", "/", (conn) => {
 	console.log("New request");
 	conn.write(
 		"<h1>Welcome to this website</h1>" +
-			'<form method="POST" action="/">' +
+			'<form method="GET" action="/">' +
 			'<input name="name" placeholder="Name" />' +
 			buildList() +
 			"<button>Submit</button>" +
@@ -34,9 +34,8 @@ rest.onRequest("get", "/", (conn) => {
 	);
 });
 
-rest.onRequest("post", "/", (conn) => {
-	conn.redirect("/");
-	console.log(conn.message)
+rest.onRequest("get", "/", (conn) => {
+	console.log(conn.message, conn.getExpressRequest().query)
 }, {
 	uwu: "yes",
 	lastName: "noname"
