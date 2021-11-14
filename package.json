@@ -13,7 +13,7 @@
 		"start": "ts-node test.ts",
 		"format": "prettier --write .",
 		"compile": "yarn format && yarn build",
-		"setup:dev": "npm run install:rest && npm run install:terminal && npm run install:socket && npm run install:utils",
+		"setup:dev": "npm run format && npm run install:rest && npm run install:terminal && npm run install:socket && npm run install:utils",
 		"install:rest": "cd rest && yarn && cd ..",
 		"install:terminal": "cd terminal && yarn && cd ..",
 		"install:socket": "cd socket && yarn && cd ..",

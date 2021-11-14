@@ -10,11 +10,15 @@ const rest = new Rest({
 	port: 8080,
 });
 
-let list = ["Walk the dog"]
+let list = ["Walk the dog"];
 
 function buildList(): string {
 	let opt = "";
-	list.forEach
+	list.forEach((it) => {
+		opt += "<p>" + it + "</p>";
+	});
+
+	return opt;
 }
 
 rest.onRequest("get", "/", (conn) => {
@@ -31,8 +35,11 @@ rest.onRequest("get", "/", (conn) => {
 });
 
 rest.onRequest("post", "/", (conn) => {
-	console.log(conn.getExpressRequest().body);
 	conn.redirect("/");
+	console.log(conn.message)
+}, {
+	uwu: "yes",
+	lastName: "noname"
 });
 
 rest.start().then((port) => {

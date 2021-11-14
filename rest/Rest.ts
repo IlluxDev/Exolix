@@ -43,16 +43,18 @@ export class Rest {
 	 * All event listeners for the server not including GET and POST
 	 */
 	private events = {
-		invalidGet: [] as ((connection: RestConnection) => void)[],
+		invalidGet: [] as ((connection: RestConnection<any>) => void)[],
 		ready: [] as ((port: RestOptions["port"]) => void)[],
 		listenError: [] as ((error: any) => void)[],
 		get: [] as {
-			listener: (connection: RestConnection) => void;
+			listener: (connection: RestConnection<any>) => void;
 			path: string;
+			default: any;
 		}[],
 		post: [] as {
-			listener: (connection: RestConnection) => void;
+			listener: (connection: RestConnection<any>) => void;
 			path: string;
+			default: any;
 		}[],
 	};
 
@@ -218,10 +220,11 @@ export class Rest {
 	 * @param requestPath The URL request path
 	 * @param listener Callback listener for when the request is fired
 	 */
-	public onRequest(
+	public onRequest<RequestType>(
 		event: "get",
 		requestPath: string,
-		listener: (connection: RestConnection) => void
+		listener: (connection: RestConnection<RequestType>) => void,
+		defaultMessageStructure?: RequestType
 	): void;
 
 	/**
@@ -230,19 +233,24 @@ export class Rest {
 	 * @param requestPath The URL request path
 	 * @param listener Callback listener for when the request is fired
 	 */
-	public onRequest(
+	public onRequest<RequestType>(
 		event: "post",
 		requestPath: string,
-		listener: (connection: RestConnection) => void
+		listener: (connection: RestConnection<RequestType>) => void,
+		defaultMessageStructure?: RequestType
 	): void;
 
-	public onRequest(event: string, requestPath: string, listener: any) {
+	public onRequest<RequestType>(
+		event: string,
+		requestPath: string,
+		listener: any,
+		defaultMessageStructure?: RequestType
+	) {
 		if (event == "get" || event == "post") {
 			this.addRequestListener(event, requestPath, (request, response) => {
-				const connection = new RestConnection(request, response);
-
 				this.events[event].forEach((eventListener) => {
 					if (eventListener.path == requestPath) {
+						const connection = new RestConnection(request, response, eventListener.default);
 						eventListener.listener(connection);
 					}
 				});
@@ -252,6 +260,7 @@ export class Rest {
 		(this.events as any)[event].push({
 			listener: listener,
 			path: requestPath,
+			default: defaultMessageStructure ?? {}
 		});
 	}
 }

@@ -1,17 +1,26 @@
+import deepmerge from "deepmerge";
 import { Request, Response } from "express";
 
-export class RestConnection {
+export class RestConnection<MessageType> {
 	private expressData: { request: Request; response: Response };
 	private responseWritten = false;
 	private dead = false;
+	public message: MessageType;
 
 	/**
 	 * A wrapper for an Express request and response
 	 * @param request Express request
 	 * @param response Express response
 	 */
-	public constructor(request: Request, response: Response) {
+	public constructor(
+		request: Request,
+		response: Response,
+		messageBase?: MessageType
+	) {
 		this.expressData = { request, response };
+		this.message = messageBase
+			? deepmerge(messageBase, this.expressData.request.body)
+			: this.expressData.request.body;
 	}
 
 	/**
