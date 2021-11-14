@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import deepmerge from "deepmerge";
 import cookieParser from "cookie-parser";
+import { RestConnection } from "./RestConnection";
 
 export interface RestOptions {
 	port?: number | null;
@@ -11,9 +12,17 @@ export class Rest {
 	private config: RestOptions;
 	private expressServer?: Express;
 	private events = {
-		invalidGet: [] as ((connection: any) => void)[],
+		invalidGet: [] as ((connection: RestConnection) => void)[],
 		ready: [] as ((port: RestOptions["port"]) => void)[],
 		listenError: [] as ((error: any) => void)[],
+		get: [] as {
+			listener: (connection: RestConnection) => void,
+			path: string
+		}[],
+		post: [] as {
+			listener: (connection: RestConnection) => void,
+			path: string
+		}[]
 	};
 	private requestListeners = {
 		get: [] as string[],
@@ -42,16 +51,6 @@ export class Rest {
 		this.expressServer = express();
 
 		this.expressServer.use(cookieParser());
-
-		this.addRequestListener("get", "/", (req, res) => {
-			console.log("INTERNAL GET");
-			res.send("2 not");
-		});
-
-		this.addRequestListener("get", "/", (req, res) => {
-			console.log("INTERNAL GET 2");
-			res.send("2 yes");
-		});
 	}
 
 	/**
@@ -137,5 +136,23 @@ export class Rest {
 				this.events.listenError.forEach((event) => event(message));
 			}
 		});
+	}
+
+	public on(event: "get", path: string, listener: (connection: RestConnection) => void): void;
+
+	public on(event: string, requestPath: string, listener: any) {
+		if (event == "get" || event == "post") {
+			this.addRequestListener(event, requestPath)
+		}
+
+		if (event == "get") {
+			this.events[event].push({
+				listener: listener,
+				path: requestPath
+			});
+			return;
+		}
+
+		(this.events as any)[event].push(listener);
 	}
 }
