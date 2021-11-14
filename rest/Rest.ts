@@ -11,6 +11,7 @@ export class Rest {
 	private started = false;
 	private config: RestOptions;
 	private expressServer?: Express;
+	private expressPlugins = [cookieParser()] as any[];
 	private events = {
 		invalidGet: [] as ((connection: RestConnection) => void)[],
 		ready: [] as ((port: RestOptions["port"]) => void)[],
@@ -50,7 +51,7 @@ export class Rest {
 	private initialize() {
 		this.expressServer = express();
 
-		this.expressServer.use(cookieParser());
+		this.expressPlugins.forEach(plugin => this.expressServer?.use(plugin));
 	}
 
 	/**
