@@ -107,4 +107,5 @@ dist
 *.js
 *.d.ts
 *.map
-!rollup.config.ks
+!rollup.config.js
+docs
