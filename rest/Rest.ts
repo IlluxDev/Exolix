@@ -9,13 +9,36 @@ export interface RestOptions {
 }
 
 export class Rest {
+	/**
+	 * Has the server started
+	 */
 	private started = false;
+
+	/**
+	 * Server configuration
+	 */
 	private config: RestOptions;
+
+	/**
+	 * Express server instance
+	 */
 	private expressServer?: Express;
+
+	/**
+	 * Plugins for the Express server
+	 */
 	private expressPlugins = [cookieParser(), express.json(), express.urlencoded({
 		extended: true
 	})] as any[];
+
+	/**
+	 * Have the plugins for the Express server been initialized on the construct event
+	 */
 	private initPluginsInstalled = false;
+
+	/**
+	 * All event listeners for the server not including GET and POST
+	 */
 	private events = {
 		invalidGet: [] as ((connection: RestConnection) => void)[],
 		ready: [] as ((port: RestOptions["port"]) => void)[],
@@ -29,6 +52,10 @@ export class Rest {
 			path: string
 		}[]
 	};
+
+	/**
+	 * GET and POST request listeners
+	 */
 	private requestListeners = {
 		get: [] as string[],
 		post: [] as string[]

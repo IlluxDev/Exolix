@@ -24,8 +24,7 @@ rest.onRequest("get", "/", (conn) => {
 
 rest.onRequest("post", "/", (conn) => {
 	console.log(conn.getExpressRequest().body);
-	conn.redirect("https://youtube.com");
-	conn.write("Done")
+	conn.redirect("/");
 });
 
 rest.start().then((port) => {
