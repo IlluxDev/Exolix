@@ -1,4 +1,5 @@
 export interface SocketOptions {
-	port?: number;
+	port?: number | null;
 	host?: string;
+	secure?: boolean;
 }

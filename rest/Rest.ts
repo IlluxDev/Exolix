@@ -197,12 +197,15 @@ export class Rest {
 
 			try {
 				this.expressServer!.listen(this.config.port, () => {
+					this.started = true;
+
 					resolve(this.config.port);
 					this.events.ready.forEach((event) =>
 						event(this.config.port)
 					);
 				});
 			} catch (error: any) {
+				this.started = false;
 				let message =
 					"An error occurred in Express server listen, " + error;
 
