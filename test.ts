@@ -1,13 +1,18 @@
 import { Rest } from "./rest/Rest";
 import { terminal } from "./terminal/Terminal";
 
-terminal.log("Hello");
+(async () => {
+	terminal.log("Hello");
 terminal.error("This is an error");
 terminal.warning("This is a warn");
 terminal.success("Success");
 
 const rest = new Rest({
 	port: 8080,
+});
+
+await terminal.read("Whats your name", ans => ans == "bean" ? false : true).then((name) => {
+	terminal.log("Hello, " + name + "!");
 });
 
 let list = ["Walk the dog"];
@@ -44,3 +49,5 @@ rest.onRequest("get", "/", (conn) => {
 rest.start().then((port) => {
 	terminal.log("Server running at " + port);
 });
+
+})();

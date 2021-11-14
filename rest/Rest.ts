@@ -149,9 +149,7 @@ export class Rest {
 					exists = true;
 				}
 
-				console.log("PASSED? " + exists);
 				if (!exists) {
-					console.log("PASSED");
 					this.requestListeners.get.push(requestPath);
 
 					this.expressServer?.get(requestPath, listener);
