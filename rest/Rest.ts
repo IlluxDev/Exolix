@@ -5,6 +5,7 @@ import { RestConnection } from "./RestConnection";
 
 export interface RestOptions {
 	port?: number | null;
+	plugins?: any[];
 }
 
 export class Rest {
@@ -12,6 +13,7 @@ export class Rest {
 	private config: RestOptions;
 	private expressServer?: Express;
 	private expressPlugins = [cookieParser(), express.json(), express.urlencoded()] as any[];
+	private initPluginsInstalled = false;
 	private events = {
 		invalidGet: [] as ((connection: RestConnection) => void)[],
 		ready: [] as ((port: RestOptions["port"]) => void)[],
@@ -35,14 +37,29 @@ export class Rest {
 	 * @param options Options for the REST server
 	 */
 	public constructor(options: RestOptions) {
-		this.config = deepmerge(
+		this.config = deepmerge<RestOptions>(
 			{
 				port: null,
+				plugins: []
 			},
 			{ ...options }
 		);
 
+		this.expressPlugins = [...this.expressPlugins, ...this.config.plugins ?? []];
 		this.initialize();
+	}
+
+	/**
+	 * Install an Express plugin to the server
+	 * @param plugin Plugin to install
+	 */
+	public installExpressPlugin(plugin: any) {
+		if (this.started) {
+			throw new Error("Cannot install plugin while server is running");
+		}
+
+		this.expressPlugins.push(plugin);
+		this.expressServer?.use(plugin);
 	}
 
 	/**
