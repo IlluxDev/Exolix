@@ -138,11 +138,19 @@ export class Rest {
 		});
 	}
 
-	public on(event: "get", path: string, listener: (connection: RestConnection) => void): void;
+	public on(event: "get", requestPath: string, listener: (connection: RestConnection) => void): void;
 
 	public on(event: string, requestPath: string, listener: any) {
 		if (event == "get" || event == "post") {
-			this.addRequestListener(event, requestPath)
+			this.addRequestListener(event, requestPath, (request, response) => {
+				const connection = new RestConnection(request, response);
+
+				this.events[event].forEach(eventListener => {
+					if (eventListener.path == requestPath) {
+						eventListener.listener(connection);
+					}
+				});
+			});
 		}
 
 		if (event == "get") {

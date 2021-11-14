@@ -10,6 +10,10 @@ const rest = new Rest({
 	port: 8080,
 });
 
+rest.on("get", "/", (conn) => {
+	console.log("New request");
+});
+
 rest.start().then((port) => {
 	terminal.log("Server running at " + port);
 });
