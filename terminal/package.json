@@ -1,9 +1,9 @@
 {
-	"name": "@neoxodev/exolix-terminal",
+	"name": "@illuxdev/exolix-terminal",
 	"version": "0.1.0",
 	"description": "",
 	"main": "dist/Terminal.js",
-	"author": "Neoxo",
+	"author": "Illux",
 	"scripts": {
 		"compile:docs": "typedoc --pretty --entryPointStrategy expand ./ --exclude \"node_modules\""
 	},

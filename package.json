@@ -1,12 +1,12 @@
 {
-	"name": "@neoxo/exolix",
+	"name": "@illux/exolix",
 	"private": true,
 	"version": "0.1.0",
 	"description": "A NodeJS framework",
 	"main": "",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/NeoxoDev/Exolix.git"
+		"url": "git+https://github.com/IlluxDev/Exolix.git"
 	},
 	"scripts": {
 		"build": "ts-node build.ts",
@@ -19,12 +19,12 @@
 		"install:socket": "cd socket && yarn && cd ..",
 		"install:utils": "cd utils && yarn && cd .."
 	},
-	"author": "Neoxo",
+	"author": "Illux",
 	"license": "Apache-2.0",
 	"bugs": {
-		"url": "https://github.com/NeoxoDev/Exolix/issues"
+		"url": "https://github.com/IlluxDev/Exolix/issues"
 	},
-	"homepage": "https://github.com/NeoxoDev/Exolix#readme",
+	"homepage": "https://github.com/IlluxDev/Exolix#readme",
 	"devDependencies": {
 		"@types/node": "^16.11.7",
 		"prettier": "^2.4.1",
