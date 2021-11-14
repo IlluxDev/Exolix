@@ -30,6 +30,8 @@ import { terminal } from "./terminal/Terminal";
 
 	rest.onRequest("get", "/", (conn) => {
 		console.log("New request");
+		conn.setCookie("beam", "true");
+		console.log(conn.getCookie("beam"));
 		conn.write(
 			"<h1>Welcome to this website</h1>" +
 				'<form method="GET" action="/">' +
@@ -45,7 +47,7 @@ import { terminal } from "./terminal/Terminal";
 		"get",
 		"/",
 		(conn) => {
-			console.log(conn.message, conn.getExpressRequest().query);
+			
 		},
 		{
 			uwu: "yes",

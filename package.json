@@ -17,7 +17,8 @@
 		"install:rest": "cd rest && yarn && cd ..",
 		"install:terminal": "cd terminal && yarn && cd ..",
 		"install:socket": "cd socket && yarn && cd ..",
-		"install:utils": "cd utils && yarn && cd .."
+		"install:utils": "cd utils && yarn && cd ..",
+		"export": "ts-node publish.ts"
 	},
 	"author": "Illux",
 	"license": "Apache-2.0",

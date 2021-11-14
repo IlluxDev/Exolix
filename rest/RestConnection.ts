@@ -69,4 +69,22 @@ export class RestConnection<MessageType> {
 		this.expressData.response.redirect(location);
 		this.dead = true;
 	}
+
+	/**
+	 * Set a cookie
+	 * @param name Cookie name
+	 * @param value Cookie value
+	 */
+	public setCookie(name: string, value: string) {
+		this.expressData.response.cookie(name, value);
+	}
+
+	/**
+	 * Get a cookie
+	 * @param name Cookie name
+	 * @returns Cookie value
+	 */
+	public getCookie(name: string): string | null {
+		return this.expressData.request.cookies[name] ?? null;
+	}
 }
