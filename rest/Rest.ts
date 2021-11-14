@@ -73,7 +73,7 @@ export class Rest {
 	public constructor(options: RestOptions) {
 		this.config = deepmerge<RestOptions>(
 			{
-				port: null,
+				port: 8080,
 				plugins: [],
 			},
 			{ ...options }

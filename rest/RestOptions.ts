@@ -1,4 +1,4 @@
 export interface RestOptions {
-	port?: number | null;
+	port?: number;
 	plugins?: any[];
 }

@@ -10,10 +10,14 @@
 	"author": "Illux",
 	"license": "Apache-2.0",
 	"dependencies": {
-		"express": "^4.17.1"
+		"deepmerge": "^4.2.2",
+		"express": "^4.17.1",
+		"express-ws": "^5.0.2"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^21.0.1",
-		"@rollup/plugin-typescript": "^8.3.0"
+		"@rollup/plugin-typescript": "^8.3.0",
+		"@types/express": "^4.17.13",
+		"@types/express-ws": "^3.0.1"
 	}
 }
