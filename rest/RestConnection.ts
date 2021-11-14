@@ -24,4 +24,8 @@ export class RestConnection {
 		this.expressData.response.send(data);
 		this.responseWritten = true;
 	}
+
+	public redirect(location: string) {
+		this.expressData.response.redirect(location);
+	}
 }
