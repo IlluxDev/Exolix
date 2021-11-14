@@ -248,7 +248,11 @@ export class Rest {
 			this.addRequestListener(event, requestPath, (request, response) => {
 				this.events[event].forEach((eventListener) => {
 					if (eventListener.path == requestPath) {
-						const connection = new RestConnection(request, response, eventListener.default);
+						const connection = new RestConnection(
+							request,
+							response,
+							eventListener.default
+						);
 						eventListener.listener(connection);
 					}
 				});
@@ -258,7 +262,7 @@ export class Rest {
 		(this.events as any)[event].push({
 			listener: listener,
 			path: requestPath,
-			default: defaultMessageStructure ?? {}
+			default: defaultMessageStructure ?? {},
 		});
 	}
 }

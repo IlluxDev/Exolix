@@ -22,7 +22,10 @@ export class RestConnection<MessageType> {
 			? deepmerge({ ...messageBase }, this.expressData.request.body)
 			: this.expressData.request.body;
 
-		this.message = deepmerge(this.message, this.expressData.request.query) as any;
+		this.message = deepmerge(
+			this.message,
+			this.expressData.request.query
+		) as any;
 	}
 
 	/**

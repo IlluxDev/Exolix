@@ -54,41 +54,50 @@ class Terminal {
 		);
 	}
 
-	public read(question: string, validator?: (answer: string) => boolean | string): Promise<string> {
+	public read(
+		question: string,
+		validator?: (answer: string) => boolean | string
+	): Promise<string> {
 		return new Promise((resolve, reject) => {
 			const ask = () => {
 				const rl = readline.createInterface({
 					output: process.stdout,
-					input: process.stdin
+					input: process.stdin,
 				});
-		
-				rl.question(chalk.hex("#50ffab")("? ") + question + ": ", (answer) => {
-					let isValid = true;
-					let validatorAnswer = validator ? validator(answer) : true;
-					let errorResponse = "Invalid response, please try again";
 
-					if (validator && validatorAnswer == true) {
-						isValid = true;
-					} else if (validator) {
-						isValid = false;
+				rl.question(
+					chalk.hex("#50ffab")("? ") + question + ": ",
+					(answer) => {
+						let isValid = true;
+						let validatorAnswer = validator
+							? validator(answer)
+							: true;
+						let errorResponse =
+							"Invalid response, please try again";
 
-						if (typeof validatorAnswer == "string") {
-							errorResponse = validatorAnswer;
+						if (validator && validatorAnswer == true) {
+							isValid = true;
+						} else if (validator) {
+							isValid = false;
+
+							if (typeof validatorAnswer == "string") {
+								errorResponse = validatorAnswer;
+							}
 						}
-					}
-	
-					if (!isValid) {
+
+						if (!isValid) {
+							rl.close();
+							terminal.error(errorResponse);
+							ask();
+							return;
+						}
+
 						rl.close();
-						terminal.error(errorResponse);
-						ask();
-						return;
+						resolve(answer);
 					}
-	
-					rl.close();
-					resolve(answer);
-				});
-			}
-	
+				);
+			};
+
 			ask();
 		});
 	}
