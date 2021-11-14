@@ -14,8 +14,18 @@ rest.onRequest("get", "/", (conn) => {
 	console.log("New request");
 	conn.write(
 		"<h1>Welcome to this website</h1>"
+		+ "<form method=\"POST\" action=\"/\">"
+			+ "<input name=\"name\" placeholder=\"Name\" />"
+			+ "<button>Submit</button>"
+		+ "</form>"
 		+ "<p>Footer | Powered by Exolix REST Api</p>"
 	);
+});
+
+rest.onRequest("post", "/", (conn) => {
+	console.log(conn.getExpressRequest().params);
+	conn.getExpressResponse().header("Location: /");
+	conn.write("Done")
 });
 
 rest.start().then((port) => {

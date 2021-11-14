@@ -5,7 +5,7 @@
 	"main": "dist/Terminal.js",
 	"author": "Neoxo",
 	"license": "Apache-2.0",
-	"devDependencies": {
+	"dependencies": {
 		"@rollup/plugin-commonjs": "^21.0.1",
 		"@rollup/plugin-typescript": "^8.3.0",
 		"chalk": "^4.1.2",
