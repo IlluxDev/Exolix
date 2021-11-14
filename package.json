@@ -9,9 +9,10 @@
 		"url": "git+https://github.com/NeoxoDev/Exolix.git"
 	},
 	"scripts": {
-		"build": "node build.js",
+		"build": "ts-node build.ts",
 		"start": "ts-node test.ts",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"compile": "yarn format && yarn build"
 	},
 	"author": "Neoxo",
 	"license": "Apache-2.0",
@@ -20,9 +21,10 @@
 	},
 	"homepage": "https://github.com/NeoxoDev/Exolix#readme",
 	"devDependencies": {
+		"@types/node": "^16.11.7",
 		"prettier": "^2.4.1",
+		"ts-node": "^10.4.0",
 		"typescript": "^4.4.4",
-		"yarn": "^1.22.17",
-		"ts-node": "^10.4.0"
+		"yarn": "^1.22.17"
 	}
 }

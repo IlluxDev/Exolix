@@ -9,9 +9,12 @@
 	"author": "Neoxo",
 	"license": "Apache-2.0",
 	"devDependencies": {
+		"@rollup/plugin-commonjs": "^21.0.1",
+		"@rollup/plugin-typescript": "^8.3.0",
 		"@types/cookie-parser": "^1.4.2",
 		"@types/express": "^4.17.13",
 		"cookie-parser": "^1.4.5",
+		"deepmerge": "^4.2.2",
 		"express": "^4.17.1",
 		"express-ws": "^5.0.2"
 	}

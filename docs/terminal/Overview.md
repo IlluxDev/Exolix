@@ -1,7 +1,9 @@
 # Overview
+
 The terminal module is useful for logging information to the console, reading data, (COMING SOON **and creating interactive experiences**)
 
 # Simple Example
+
 ```js
 // main.js
 const { terminal } = require("@axeridev/exolix-terminal");

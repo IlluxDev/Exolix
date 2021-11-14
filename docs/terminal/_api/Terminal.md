@@ -1,12 +1,14 @@
 # Class: `Terminal`
 
 # Information
- - Is Exported: false
- - Export: `{ terminal }`
- - Package: `@axeridev/exolix-terminal`
- - Location: `/terminal/Terminal.ts`
+
+-   Is Exported: false
+-   Export: `{ terminal }`
+-   Package: `@axeridev/exolix-terminal`
+-   Location: `/terminal/Terminal.ts`
 
 # Public Methods
+
 | Name      | Returns | Parameters     | Description                          |
 | --------- | ------- | -------------- | ------------------------------------ |
 | `log`     | `void`  | `text: string` | Log text to the console              |

@@ -1,5 +1,5 @@
 import express, { Express } from "express";
-import { utils } from "../utils/Utils";
+import deepmerge from "deepmerge";
 import cookieParser from "cookie-parser";
 
 export interface RestOptions {
@@ -21,7 +21,7 @@ export class Rest {
 	 * @param options Options for the REST server
 	 */
 	public constructor(options: RestOptions) {
-		this.config = utils.merge(
+		this.config = deepmerge(
 			{
 				port: null,
 			},
