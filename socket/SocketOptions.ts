@@ -1,5 +1,11 @@
 export interface SocketOptions {
 	port?: number | null;
 	host?: string;
-	secure?: boolean;
+	ssl?:
+		| {
+				certificate: string;
+				key: string;
+		  }
+		| false;
+	connectionLimit?: number;
 }

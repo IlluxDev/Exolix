@@ -4,8 +4,7 @@ import cookieParser from "cookie-parser";
 import { RestConnection } from "./RestConnection";
 import { RestOptions } from "./RestOptions";
 
-export { RestOptions };
-export { RestConnection };
+export { RestOptions, RestConnection };
 
 export class Rest {
 	/**

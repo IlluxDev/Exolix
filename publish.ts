@@ -30,7 +30,9 @@ fs.readdir(
 
 		files.forEach((file: string) => {
 			process.chdir(path.join(config.currentDir, file));
-			const proc = exec("npm i | npx rollup -c | npm publish --access public");
+			const proc = exec(
+				"npm i | npx rollup -c | npm publish --access public"
+			);
 
 			proc.stdout?.on("data", (data) =>
 				terminal.log("[ " + file + " ] >_" + data.replace("\n", ""))
