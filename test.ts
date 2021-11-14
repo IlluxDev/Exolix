@@ -10,8 +10,12 @@ const rest = new Rest({
 	port: 8080,
 });
 
-rest.on("get", "/", (conn) => {
+rest.onRequest("get", "/", (conn) => {
 	console.log("New request");
+	conn.write(
+		"<h1>Welcome to this website</h1>"
+		+ "<p>Footer | Powered by Exolix REST Api</p>"
+	);
 });
 
 rest.start().then((port) => {

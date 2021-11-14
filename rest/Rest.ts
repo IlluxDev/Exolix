@@ -55,6 +55,18 @@ export class Rest {
 	}
 
 	/**
+	 * Get the Express server instance
+	 * @returns The Express server instance
+	 */
+	public getExpressServer(): Express {
+		if (this.started) {
+			return this.expressServer!;
+		}
+
+		throw new Error("The Express server is not alive");
+	}
+
+	/**
 	 * Add an event listener if possible
 	 * @param type Type of request to listen for
 	 * @param requestPath Path for the request
@@ -139,9 +151,23 @@ export class Rest {
 		});
 	}
 
-	public on(event: "get", requestPath: string, listener: (connection: RestConnection) => void): void;
+	/**
+	 * Listen for GET request
+	 * @param event Event Name
+	 * @param requestPath The URL request path
+	 * @param listener Callback listener for when the request is fired
+	 */
+	public onRequest(event: "get", requestPath: string, listener: (connection: RestConnection) => void): void;
 
-	public on(event: string, requestPath: string, listener: any) {
+	/**
+	 * Listen for POST requests
+	 * @param event Event Name
+	 * @param requestPath The URL request path
+	 * @param listener Callback listener for when the request is fired
+	 */
+	public onRequest(event: "post", requestPath: string, listener: (connection: RestConnection) => void): void;
+
+	public onRequest(event: string, requestPath: string, listener: any) {
 		if (event == "get" || event == "post") {
 			this.addRequestListener(event, requestPath, (request, response) => {
 				const connection = new RestConnection(request, response);
@@ -154,14 +180,9 @@ export class Rest {
 			});
 		}
 
-		if (event == "get") {
-			this.events[event].push({
-				listener: listener,
-				path: requestPath
-			});
-			return;
-		}
-
-		(this.events as any)[event].push(listener);
+		(this.events as any)[event].push({
+			listener: listener,
+			path: requestPath
+		});
 	}
 }
