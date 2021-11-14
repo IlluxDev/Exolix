@@ -2,11 +2,7 @@ import express, { Express, Request, Response } from "express";
 import deepmerge from "deepmerge";
 import cookieParser from "cookie-parser";
 import { RestConnection } from "./RestConnection";
-
-export interface RestOptions {
-	port?: number | null;
-	plugins?: any[];
-}
+import { RestOptions } from "./RestOptions";
 
 export class Rest {
 	/**
