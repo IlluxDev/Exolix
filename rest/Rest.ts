@@ -4,6 +4,9 @@ import cookieParser from "cookie-parser";
 import { RestConnection } from "./RestConnection";
 import { RestOptions } from "./RestOptions";
 
+export { RestOptions };
+export { RestConnection };
+
 export class Rest {
 	/**
 	 * Has the server started
