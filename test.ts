@@ -23,7 +23,7 @@ rest.onRequest("get", "/", (conn) => {
 });
 
 rest.onRequest("post", "/", (conn) => {
-	console.log(conn.getExpressRequest().params);
+	console.log(conn.getExpressRequest().body);
 	conn.getExpressResponse().header("Location: /");
 	conn.write("Done")
 });

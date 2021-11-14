@@ -12,7 +12,9 @@ export class Rest {
 	private started = false;
 	private config: RestOptions;
 	private expressServer?: Express;
-	private expressPlugins = [cookieParser(), express.json(), express.urlencoded()] as any[];
+	private expressPlugins = [cookieParser(), express.json(), express.urlencoded({
+		extended: true
+	})] as any[];
 	private initPluginsInstalled = false;
 	private events = {
 		invalidGet: [] as ((connection: RestConnection) => void)[],
