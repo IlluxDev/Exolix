@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 export class RestConnection {
-	private expressData: { request: Request, response: Response };
+	private expressData: { request: Request; response: Response };
 	private responseWritten = false;
 	private dead = false;
 
@@ -11,7 +11,7 @@ export class RestConnection {
 	 * @param response Express response
 	 */
 	public constructor(request: Request, response: Response) {
-		this.expressData = {request, response};
+		this.expressData = { request, response };
 	}
 
 	/**

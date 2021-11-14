@@ -30,7 +30,7 @@ fs.readdir(
 
 		files.forEach((file: string) => {
 			process.chdir(path.join(config.currentDir, file));
-			const proc = exec("npx rollup -c");
+			const proc = exec("npm i | npx rollup -c");
 
 			proc.stdout?.on("data", (data) =>
 				terminal.log("[ " + file + " ] >_" + data.replace("\n", ""))

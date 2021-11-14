@@ -26,9 +26,13 @@ export class Rest {
 	/**
 	 * Plugins for the Express server
 	 */
-	private expressPlugins = [cookieParser(), express.json(), express.urlencoded({
-		extended: true
-	})] as any[];
+	private expressPlugins = [
+		cookieParser(),
+		express.json(),
+		express.urlencoded({
+			extended: true,
+		}),
+	] as any[];
 
 	/**
 	 * Have the plugins for the Express server been initialized on the construct event
@@ -43,13 +47,13 @@ export class Rest {
 		ready: [] as ((port: RestOptions["port"]) => void)[],
 		listenError: [] as ((error: any) => void)[],
 		get: [] as {
-			listener: (connection: RestConnection) => void,
-			path: string
+			listener: (connection: RestConnection) => void;
+			path: string;
 		}[],
 		post: [] as {
-			listener: (connection: RestConnection) => void,
-			path: string
-		}[]
+			listener: (connection: RestConnection) => void;
+			path: string;
+		}[],
 	};
 
 	/**
@@ -57,7 +61,7 @@ export class Rest {
 	 */
 	private requestListeners = {
 		get: [] as string[],
-		post: [] as string[]
+		post: [] as string[],
 	};
 
 	/**
@@ -68,12 +72,15 @@ export class Rest {
 		this.config = deepmerge<RestOptions>(
 			{
 				port: null,
-				plugins: []
+				plugins: [],
 			},
 			{ ...options }
 		);
 
-		this.expressPlugins = [...this.expressPlugins, ...this.config.plugins ?? []];
+		this.expressPlugins = [
+			...this.expressPlugins,
+			...(this.config.plugins ?? []),
+		];
 		this.initialize();
 	}
 
@@ -96,7 +103,9 @@ export class Rest {
 	private initialize() {
 		this.expressServer = express();
 
-		this.expressPlugins.forEach(plugin => this.expressServer?.use(plugin));
+		this.expressPlugins.forEach((plugin) =>
+			this.expressServer?.use(plugin)
+		);
 	}
 
 	/**
@@ -118,13 +127,20 @@ export class Rest {
 	 * @param listener Callback for when request is called
 	 * @returns void
 	 */
-	private addRequestListener(type: "get" | "post", requestPath: string, listener: (request: Request, response: Response) => void) {
-		const checkExists = (checkPath: string, listeners: string[]): boolean => {
+	private addRequestListener(
+		type: "get" | "post",
+		requestPath: string,
+		listener: (request: Request, response: Response) => void
+	) {
+		const checkExists = (
+			checkPath: string,
+			listeners: string[]
+		): boolean => {
 			return listeners.includes(checkPath);
-		}
-		
+		};
+
 		if (type == "get") {
-			this.requestListeners.get.forEach(element => {
+			this.requestListeners.get.forEach((element) => {
 				let exists = false;
 
 				if (checkExists(element, this.requestListeners.get)) {
@@ -133,22 +149,22 @@ export class Rest {
 
 				console.log("PASSED? " + exists);
 				if (!exists) {
-					console.log("PASSED")
+					console.log("PASSED");
 					this.requestListeners.get.push(requestPath);
-	
+
 					this.expressServer?.get(requestPath, listener);
 				}
 			});
 
 			if (this.requestListeners.get.length == 0) {
 				this.requestListeners.get.push(requestPath);
-	
+
 				this.expressServer?.get(requestPath, listener);
 			}
 			return;
 		}
 
-		this.requestListeners.post.forEach(element => {
+		this.requestListeners.post.forEach((element) => {
 			let exists = false;
 
 			if (checkExists(element, this.requestListeners.post)) {
@@ -202,7 +218,11 @@ export class Rest {
 	 * @param requestPath The URL request path
 	 * @param listener Callback listener for when the request is fired
 	 */
-	public onRequest(event: "get", requestPath: string, listener: (connection: RestConnection) => void): void;
+	public onRequest(
+		event: "get",
+		requestPath: string,
+		listener: (connection: RestConnection) => void
+	): void;
 
 	/**
 	 * Listen for POST requests
@@ -210,14 +230,18 @@ export class Rest {
 	 * @param requestPath The URL request path
 	 * @param listener Callback listener for when the request is fired
 	 */
-	public onRequest(event: "post", requestPath: string, listener: (connection: RestConnection) => void): void;
+	public onRequest(
+		event: "post",
+		requestPath: string,
+		listener: (connection: RestConnection) => void
+	): void;
 
 	public onRequest(event: string, requestPath: string, listener: any) {
 		if (event == "get" || event == "post") {
 			this.addRequestListener(event, requestPath, (request, response) => {
 				const connection = new RestConnection(request, response);
 
-				this.events[event].forEach(eventListener => {
+				this.events[event].forEach((eventListener) => {
 					if (eventListener.path == requestPath) {
 						eventListener.listener(connection);
 					}
@@ -227,7 +251,7 @@ export class Rest {
 
 		(this.events as any)[event].push({
 			listener: listener,
-			path: requestPath
+			path: requestPath,
 		});
 	}
 }
