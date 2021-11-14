@@ -55,7 +55,7 @@ export class Rest {
 	}
 
 	/**
-	 * Add an event listener if posible
+	 * Add an event listener if possible
 	 * @param type Type of request to listen for
 	 * @param requestPath Path for the request
 	 * @param listener Callback for when request is called
