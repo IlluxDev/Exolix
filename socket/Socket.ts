@@ -4,6 +4,7 @@ import https from "https";
 import deepmerge from "deepmerge";
 import { WebSocketServer } from "ws";
 import { SocketConnection } from "./SocketConnection";
+import * as uuid from "uuid";
 
 export { SocketOptions, SocketConnection };
 
@@ -12,6 +13,7 @@ export class Socket {
 	private httpServer?: http.Server | https.Server;
 	private started = false;
 	private settings: SocketOptions;
+	private connections = {} as { [index: string]: SocketConnection };
 	private events = {
 		ready: [] as any[],
 		error: [] as any[],
@@ -48,7 +50,24 @@ export class Socket {
 		});
 
 		this.websocketServer?.on("connection", (ws) => {
-			console.log(ws);
+			let id = "";
+
+			const reGenUuid = () => {
+				if (id.length == 0) {
+					id = uuid.v1() + uuid.v1();
+				}
+
+				if (this.connections[id]) {
+					reGenUuid();
+				}
+			};
+
+			reGenUuid();
+
+			const connection = new SocketConnection(ws, id);
+			this.connections[id] = connection;
+
+			this.events.open.forEach((event) => event(connection));
 		});
 	}
 

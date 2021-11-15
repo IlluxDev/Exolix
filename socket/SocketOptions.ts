@@ -4,7 +4,7 @@ export interface SocketOptions {
 	ssl?:
 		| {
 				certificate: string;
-				key: string;
+				key?: string;
 		  }
 		| false;
 	connectionLimit?: number;

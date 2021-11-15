@@ -1,3 +1,15 @@
+import { WebSocket } from "ws";
+
 export class SocketConnection {
-	public constructor(ws: WebSocket) {}
+	private identifier: string;
+	private ws: WebSocket;
+
+	public constructor(ws: WebSocket, identifier: string) {
+		this.identifier = identifier;
+		this.ws = ws;
+	}
+
+	public getIdentifier(): string {
+		return this.identifier;
+	}
 }
