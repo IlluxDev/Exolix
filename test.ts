@@ -1,16 +1,17 @@
-import { Socket } from "./socket/Socket";
 import { terminal } from "./terminal/Terminal";
+import { Cli } from "./cli/Cli";
 
-Error.stackTraceLimit = Infinity;
+terminal.log("Illux Exolix");
+terminal.log("Command handler unit");
 
-const ws = new Socket({
-	port: 3000
+const application = new Cli();
+
+application.addCommand("greet", {
+	name: "string"
+}, (args, flags) => {
+	console.log(`Hello ${flags.name}`);
+}, {
+	requiredFlags: [ "name" ]
 });
 
-ws.on("open", conn => {
-	terminal.log("New connection");
-});
-
-ws.start().then((port) => {
-	terminal.success("WS server running at port " + port);
-});
+application.execute(application.processSplice(process.argv));

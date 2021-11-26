@@ -49,7 +49,7 @@ export class Socket {
 			this.events.error.forEach((event) => event(error));
 		});
 
-		this.websocketServer?.on("connection", (ws) => {
+		this.websocketServer?.on("connection", (ws, request) => {
 			let id = "";
 
 			const reGenUuid = () => {
@@ -64,7 +64,7 @@ export class Socket {
 
 			reGenUuid();
 
-			const connection = new SocketConnection(ws, id);
+			const connection = new SocketConnection(ws, request, id);
 			this.connections[id] = connection;
 
 			this.events.open.forEach((event) => event(connection));

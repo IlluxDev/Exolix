@@ -8,7 +8,7 @@ class Terminal {
 	 * @param text Text to log
 	 */
 	public log(text: string | number) {
-		console.log(this.prefix("#888", "INFO", text));
+		console.log(Terminal.prefix("#888", "INFO", text));
 	}
 
 	/**
@@ -16,7 +16,7 @@ class Terminal {
 	 * @param text Text to log
 	 */
 	public error(text: string | number) {
-		console.log(this.prefix("#ff5555", "ERROR", text));
+		console.log(Terminal.prefix("#ff5555", "ERROR", text));
 	}
 
 	/**
@@ -24,7 +24,7 @@ class Terminal {
 	 * @param text Text to log
 	 */
 	public warning(text: string | number) {
-		console.log(this.prefix("#ffff55", "WARNING", text));
+		console.log(Terminal.prefix("#ffff55", "WARNING", text));
 	}
 
 	/**
@@ -32,7 +32,7 @@ class Terminal {
 	 * @param text Text to log
 	 */
 	public success(text: string | number) {
-		console.log(this.prefix("#50ffab", "SUCCESS", text));
+		console.log(Terminal.prefix("#50ffab", "SUCCESS", text));
 	}
 
 	/**
@@ -42,7 +42,7 @@ class Terminal {
 	 * @param text Text message
 	 * @returns Full output
 	 */
-	private prefix(
+	private static prefix(
 		color: string,
 		prefix: string,
 		text: string | number
@@ -99,6 +99,28 @@ class Terminal {
 			};
 
 			ask();
+		});
+	}
+
+	public selectList() {
+		// TODO: Dont allow if already running
+
+		let index = 0;
+
+		readline.emitKeypressEvents(process.stdin);
+		process.stdin.setRawMode(true);
+
+		process.stdin.on("keypress", (str, key) => {
+			if (key.name == "up" || key.name == "right") {
+				index++;
+			}
+
+			if (key.name == "down" || key.name == "left") {
+				index--;
+			}
+
+			console.clear();
+			console.log("\n".repeat(index > -1 ? index : 0) + ">");
 		});
 	}
 }

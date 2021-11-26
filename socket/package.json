@@ -1,6 +1,6 @@
 {
 	"name": "@illuxdev/exolix-socket",
-	"version": "0.1.0",
+	"version": "0.1.0-dev",
 	"description": "",
 	"main": "dist/Socket.js",
 	"scripts": {

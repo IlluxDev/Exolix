@@ -1,7 +1,7 @@
 {
-	"name": "@illux/exolix",
+	"name": "@illuxdev/exolix",
 	"private": true,
-	"version": "0.1.0",
+	"version": "0.1.0-dev",
 	"description": "A NodeJS framework",
 	"main": "",
 	"repository": {
@@ -10,15 +10,15 @@
 	},
 	"scripts": {
 		"build": "ts-node build.ts",
-		"start": "ts-node test.ts",
+		"start": "node test.js arg1 arg2 --flag --valueFlag \"Value Flag\"",
 		"format": "prettier --write .",
 		"compile": "yarn format && yarn build",
-		"setup:dev": "npm run format && npm run install:rest && npm run install:terminal && npm run install:socket && npm run install:utils",
-		"install:rest": "cd rest && yarn && cd ..",
-		"install:terminal": "cd terminal && yarn && cd ..",
-		"install:socket": "cd socket && yarn && cd ..",
-		"install:utils": "cd utils && yarn && cd ..",
-		"export": "ts-node publish.ts"
+		"setup:rest": "cd rest && yarn && cd ..",
+		"setup:terminal": "cd terminal && yarn && cd ..",
+		"setup:socket": "cd socket && yarn && cd ..",
+		"setup:utils": "cd utils && yarn && cd ..",
+		"postinstall": "npm run format && npm run install:rest && npm run install:terminal && npm run install:socket && npm run install:utils",
+		"dev": "tsc --watch"
 	},
 	"author": "Illux",
 	"license": "Apache-2.0",

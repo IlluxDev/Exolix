@@ -73,6 +73,7 @@ export class Rest {
 		this.config = deepmerge<RestOptions>(
 			{
 				port: 8080,
+				host: "0.0.0.0",
 				plugins: [],
 			},
 			{ ...options }
@@ -195,14 +196,19 @@ export class Rest {
 			}
 
 			try {
-				this.expressServer!.listen(this.config.port, () => {
-					this.started = true;
+				this.expressServer!.listen(
+					this.config.port ?? 8080,
+					this.config.host ?? "0.0.0.0",
+					Infinity,
+					() => {
+						this.started = true;
 
-					resolve(this.config.port);
-					this.events.ready.forEach((event) =>
-						event(this.config.port)
-					);
-				});
+						resolve(this.config.port);
+						this.events.ready.forEach((event) =>
+							event(this.config.port)
+						);
+					}
+				);
 			} catch (error: any) {
 				this.started = false;
 				let message =
