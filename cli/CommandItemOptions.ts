@@ -1,3 +1,5 @@
 export interface CommandItemOptions {
-	requiredFlags?: string[]
+	requiredFlags?: string[];
+	description?: string;
+	usage?: string;
 }
