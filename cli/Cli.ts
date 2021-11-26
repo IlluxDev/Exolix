@@ -1,5 +1,4 @@
-import yargs from "yargs/yargs";
-import { help as yargsHelp } from "yargs";
+import yargs from "yargs";
 import { CommandRegistryItem } from "./CommandRegistryItem";
 import { CommandItemOptions } from "./CommandItemOptions";
 import deepmerge from "deepmerge";
@@ -17,9 +16,7 @@ export class Cli {
 	};
 
 	public constructor() {
-		yargsHelp(false);
-
-		this.addCommand("help?", {}, (args, flags) => {
+		this.addCommand("help", {}, (args, flags) => {
 			if (args.length == 0) {
 				this.helpMeta.renderer(this.helpList);
 				return;
@@ -79,7 +76,9 @@ export class Cli {
 	}
 
 	public execute(args: string[]) {
-		const parsed = yargs(args).argv as {
+		const parsed = yargs
+			.help(false)
+			.parse(args) as {
 			_: string[],
 			"$0": string,
 			[index: string]: any
