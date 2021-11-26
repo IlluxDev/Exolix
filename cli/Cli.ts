@@ -65,7 +65,7 @@ export class Cli {
 				console.log(" Options:");
 
 				for (const flag in helpPage.flags) {
-					console.log("  --" + flag);
+					console.log("  --" + flag + " - " + helpPage.flags[flag].description);
 				}
 			}
 		});

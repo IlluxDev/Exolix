@@ -3,6 +3,9 @@ export interface CommandHelpPage {
 	usage: string;
 	commandName: string;
 	flags: {
-		[index: string]: string;
+		[index: string]: {
+			type: string;
+			description: string;
+		};
 	};
 }

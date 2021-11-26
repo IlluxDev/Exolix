@@ -17,7 +17,10 @@ application.on("usageError", error => {
 });
 
 application.addCommand("greet", {
-	name: "string"
+	name: {
+		type: "string",
+		description: "Your first name or full name"
+	}
 }, (args, flags) => {
 	console.log(`Hello ${flags.name}`);
 }, {
