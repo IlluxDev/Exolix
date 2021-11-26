@@ -2,9 +2,13 @@ import yargs from "yargs/yargs";
 import { CommandRegistryItem } from "./CommandRegistryItem";
 import { CommandItemOptions } from "./CommandItemOptions";
 import deepmerge from "deepmerge";
+import { CommandUsageError } from "./CommandUsageError";
 
 export class Cli {
 	private commandRegistry: CommandRegistryItem[] = [];
+	private events = {
+		usageError: [] as any[]
+	};
 
 	public constructor() {
 	}
@@ -71,18 +75,25 @@ export class Cli {
 					return;
 				}
 
-				if (invalidFlags.length != 0) {
-					console.log(" [ ERR ] The following flags should not be here: " + invalidFlags.join(", "));
-				}
+				const usageError: CommandUsageError = {
+					invalidFlags,
+					missingFlags
+				};
 
-				if (missingFlags.length != 0) {
-					console.log(" [ ERR ] The following flags are required: " + missingFlags.join(", "));
-				}
+				this.events.usageError.forEach(listener => {
+					listener(usageError);
+				});
 			}
 		});
 	}
 
 	public processSplice(processArgv: string[]): string[] {
 		return processArgv.splice(2);
+	}
+
+	public on(event: "usageError", listener: (errorData: CommandUsageError) => void): void;
+
+	public on(event: any, listener: any) {
+		(this.events as any)[event].push(listener);
 	}
 }
