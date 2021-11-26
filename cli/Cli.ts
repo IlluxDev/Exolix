@@ -16,7 +16,7 @@ export class Cli {
 	};
 
 	public constructor() {
-		this.addCommand("help", {}, (args, flags) => {
+		this.addCommand("help", {}, (args) => {
 			if (args.length == 0) {
 				this.helpMeta.renderer(this.helpList);
 				return;
