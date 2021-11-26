@@ -2,19 +2,14 @@
 	"name": "@illuxdev/exolix-terminal",
 	"version": "0.1.0-dev",
 	"description": "",
-	"main": "dist/Terminal.js",
+	"main": "Terminal.js",
 	"author": "Illux",
 	"scripts": {
-		"compile:docs": "typedoc --pretty --entryPointStrategy expand ./ --exclude \"node_modules\""
+		"build": "npx tsc"
 	},
 	"license": "Apache-2.0",
 	"dependencies": {
 		"chalk": "^4.1.2",
-		"moment": "^2.29.1",
-		"rollup": "^2.60.0"
-	},
-	"devDependencies": {
-		"@rollup/plugin-commonjs": "^21.0.1",
-		"@rollup/plugin-typescript": "^8.3.0"
+		"moment": "^2.29.1"
 	}
 }
